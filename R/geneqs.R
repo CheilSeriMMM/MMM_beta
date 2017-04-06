@@ -1,7 +1,7 @@
 geneqs = function(model, model_fit){ 
   
   Est <- parameterEstimates(model_fit)
-  depvar <- Est$lhs[1]   
+  depVar <- Est$lhs[1]   
   numOfeq <- length(model)
   
   
@@ -98,7 +98,7 @@ geneqs = function(model, model_fit){
   
   
   eqs<<-equationset$equat
-  y<<-depvar
+  y<<-depVar
   full_equation<<-equation
   inputvar<<- intersect(gsub("ln","",regressors),medialist)
   
