@@ -54,7 +54,7 @@ responsecurve <- function(startMonth, endMonth, media){
     out=ggplot(graphset_digital, aes(x=input, y=yhat, colour=media))+
     geom_line()+
     scale_y_continuous(labels=comma)+scale_x_continuous(labels=comma)+
-    ggtitle("매체별 반응곡선 - Digital")
+    ggtitle(" - Digital")
   
   return(out)
 }
