@@ -1,4 +1,4 @@
-basicmodelfitting = function(data,model,model_fit){
+basicmodelfitting = function(){
   
   library(reshape2)
   library(ggplot2)
@@ -28,7 +28,7 @@ basicmodelfitting = function(data,model,model_fit){
   }
   
 
-  y_hat=with(data, exp(eval(parse(text=temp1))))
+  y_hat=with(stockeddata, exp(eval(parse(text=temp1))))
     
   temp=data.frame(time=c(1:length(y_hat)),y=exp(data[,depvar]),y_hat=y_hat)
   temp_melt=melt(temp,id='time')
