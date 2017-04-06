@@ -56,13 +56,13 @@ digitalnondigitalopt <- function(
   sim_set[,paste0("ln",varn1)]<-log(case)
   
   
-  #### digital 
+  
   dd<-0
   for (i in 1:ncol(newparam)){
     
     vvarn<-colnames(newparam)[i]
     vvarnval<-newparma[,vvarn]/varnval1
-    sim_set[,vvarn]<-case * vvarnval #로그 변환 변수는 동일하게 변환하여 넣는다.
+    sim_set[,vvarn]<-case * vvarnval 
     sim_set[,paste0("ln",vvarn)]<-log(case)+log(vvarnval+logadj1)
     dd<-dd+vvarnval
   }  
@@ -73,7 +73,7 @@ digitalnondigitalopt <- function(
   
   
   
-  ############################  digital vs non-digital 구도로
+ 
 
   
   buli_sim$nondigitalall4<-with(buli_sim, (max_budget-digital4))
