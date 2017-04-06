@@ -22,7 +22,7 @@ make_objfunc_gradient<-function(
   for(i in 1:nrow(a)){
     nolog3 <- sub("ln","",a[i,"var"]) 
     
-    if(nolog3%in%atllist){             ##### atllist
+    if(nolog3%in%atllist){            
       a[i,"group"]<-"atl"  
     } else {
       a[i,"group"]<-"digital"
@@ -50,9 +50,9 @@ make_objfunc_gradient<-function(
   for(i in 1:nrow(a)){
     noln <- sub("ln","",a[i,"var"])
     
-    if(noln%in%grpgroup){                              ### grpgroup
+    if(noln%in%grpgroup){                            
       if(noln=="grp_all"){
-        grpprice <- pricepergrp *conversionrate        ### pricepergrp
+        grpprice <- pricepergrp *conversionrate       
       } else if(noln=="grp_tv"){
         grpprice <- tvpricepergrp*conversionrate
       } else if(noln=="grp_ca"){
@@ -81,28 +81,24 @@ make_objfunc_gradient<-function(
   
   a[,"partialdiff_expdt"]<-a[,"multiplier_expdt"]
   
-  # for(i in (1:nrow(a))){
-  #   #rem <-paste(a$vars_expdt[-i], collapse="+")
-  #   #a[i,"partialdiff_expdt"]<-paste(a[i,"multiplier_expdt"], rem,sep="+")
-  #   a[i,"partialdiff_expdt"]<-a[i,"multiplier_expdt"]
-  # }
+
   
   digitalnusubset<-subset(a,group=="digital")
   digitalnu<-paste(digitalnusubset$vars,collapse="+")
   digitalnu<-paste0("(",digitalnu,")")
   
-  digitalra<-paste0("(",digitalnu,"^",digitalratiocoeff,")")    ###digitalratiocoeff
+  digitalra<-paste0("(",digitalnu,"^",digitalratiocoeff,")")   
   
   atlnusubset<-subset(a,group=="atl")
   atlnu<-paste(atlnusubset$vars,collapse="+")
   atlnu<-paste0("(",atlnu,")")
-  atlra<-paste0("(",atlnu,"^",atlratiocoeff,")")             ###atlratiocoeff
+  atlra<-paste0("(",atlnu,"^",atlratiocoeff,")")            
   
-  ratio_func<-paste(digitalra,atlra,sep="*")               ###digitalra
+  ratio_func<-paste(digitalra,atlra,sep="*")            
   
   
   objfunc<-paste(objfunc_origin,digitalra,sep="*")
-  objfunc<-paste(objfunc,atlra,sep="*")                     ###atlra
+  objfunc<-paste(objfunc,atlra,sep="*")                    
   finobjfunc<-paste('-1',objfunc, sep="*")
   
   
@@ -110,7 +106,7 @@ make_objfunc_gradient<-function(
   
   for(i in 1:nrow(a)){
     if(a[i,"group"]=="digital"){
-      nn<-paste(digitalratiocoeff,digitalnu,sep="*")      ###digitalnu
+      nn<-paste(digitalratiocoeff,digitalnu,sep="*")      
       nn<-paste0(nn,"^","(",digitalratiocoeff-1,")")
       nn<-paste(nn,atlra,sep="*")
       a[i,"comp_ratio_nu"]<-digitalra
@@ -147,22 +143,12 @@ make_objfunc_gradient<-function(
   }
   
   
-  objfuncbase1<-paste("baserev",finobjfunc,sep="*")
-  objfuncbase2<-paste("baserev",objfunc,sep="*")
-  
-  
-  objfunc1<-paste(objfuncbase1,spnedfunc,sep="+")
-  objfunc2<-spnedfunc
-  
-  gradient1<-b # ¸ñÀûÇÔ¼öÀÇ gradient
-  #gradient2<-d # ¸ñÇ¥¸ÅÃâ case ºÎµî½Ä Á¦¾àÇÔ¼öÀÇ gradient
-  
   
   eval_g_ineq1func<- paste(spnedfunc,"(totalspends_mean)",sep="-")
-  eval_g_ineq1_gradient<-c # ¿¹»êÁ¦¾à ºÎµîÈ£ Á¦¾àÀÇ gradient
+  eval_g_ineq1_gradient<-c # ì˜ˆì‚°ì œì•½ ë¶€ë“±í˜¸ ì œì•½ì˜ gradient
   
   
   eval_g_ineq2func<- paste("opt_revtarget",objfuncbase2,sep="-")
-  eval_g_ineq2_gradient<-d # ¸ñÇ¥¸ÅÃâ ºÎµîÈ£ Á¦¾àÀÇ gradient  
+  eval_g_ineq2_gradient<-d # ëª©í‘œë§¤ì¶œ ë¶€ë“±í˜¸ ì œì•½ì˜ gradient  
 }
 
