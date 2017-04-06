@@ -13,7 +13,7 @@ systemmodelfitting=function(model,model_fit,time){
   
   ggplot()+
     geom_line(aes(x=time, y=value, colour=variable), data=temp_melt, stat="identity") +
-    ggtitle("Òï¨ë¸ ? •?™•?„") +
+    ggtitle("") +
     theme(legend.position="right", legend.direction="vertical", legend.title = element_blank()) +
     labs(fill="") +
     labs(x='time', y="sales amount") +
