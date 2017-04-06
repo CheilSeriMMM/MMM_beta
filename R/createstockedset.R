@@ -1,7 +1,7 @@
 createstockedset=function(){
   week_transformed <- unstockeddata 
   
-  carryrate <- 0.449^(1/4)
+  carryrate <- lambda1
   
   colnames(week_transformed)
   target_var <- c(8:17, 31:50)
