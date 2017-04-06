@@ -1,0 +1,12 @@
+\name{basicmodelfitting}
+\alias{basicmodelfitting}
+\title{basicmodelfitting}
+\usage{
+basicmodelfitting(data,model,model_fit)
+}
+\description{
+basicmodelfitting
+}
+\examples{
+basicmodelfitting(data,model,model_fit)
+}

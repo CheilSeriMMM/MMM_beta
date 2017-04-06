@@ -1,0 +1,25 @@
+
+systemmodelfitting=function(model,model_fit,time){
+  library(reshape2)
+  library(ggplot2)
+  
+  result=geneqs(model,model_fit)
+  
+  
+  y_hat=with(data, exp(eval(parse(text=result[[2]]))))
+  
+  temp=data.frame(time=time,y=data[,dependent],y_hat=y_hat)
+  temp_melt=melt(temp, id='time')
+  
+  ggplot()+
+    geom_line(aes(x=time, y=value, colour=variable), data=temp_melt, stat="identity") +
+    ggtitle("Òï¨ë¸ ? •?™•?„") +
+    theme(legend.position="right", legend.direction="vertical", legend.title = element_blank()) +
+    labs(fill="") +
+    labs(x='time', y="sales amount") +
+    theme_bw() +
+    theme(axis.line = element_line(size=1, colour = "black"), panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(), panel.border = element_blank(),
+          panel.background = element_blank())
+  
+}

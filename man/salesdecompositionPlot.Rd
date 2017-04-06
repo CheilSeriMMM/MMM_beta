@@ -1,0 +1,12 @@
+\name{salesdecompositionPlot}
+\alias{salesdecompositionPlot}
+\title{salesdecompositionPlot}
+\usage{
+salesdecompositionPlot(data,time,dependent,decompose_dataset)
+}
+\description{
+salesdecompositionPlot
+}
+\examples{
+salesdecompositionPlot(data,time,dependent,decompose_dataset)
+}

@@ -1,0 +1,12 @@
+\name{createunstockedset}
+\alias{createunstockedset}
+\title{createunstockedset}
+\usage{
+createunstockedset()
+}
+\description{
+createunstockedset
+}
+\examples{
+createunstockedset()
+}

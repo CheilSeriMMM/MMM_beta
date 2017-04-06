@@ -1,0 +1,3 @@
+createstockedset=function(){
+  
+}

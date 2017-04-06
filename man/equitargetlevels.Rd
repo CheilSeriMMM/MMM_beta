@@ -1,0 +1,12 @@
+\name{equitargetlevels}
+\alias{equitargetlevels}
+\title{equitargetlevels}
+\usage{
+equitargetlevels(startpoint,endpoint,numberoflevels,group1,group2,sim_base_month)
+}
+\description{
+equitargetlevels
+}
+\examples{
+equitargetlevels(startpoint,endpoint,numberoflevels,group1,group2,sim_base_month)
+}

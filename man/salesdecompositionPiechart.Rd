@@ -1,0 +1,12 @@
+\name{salesdedication_piechart}
+\alias{salesdedication_piechart}
+\title{salesdedication_piechart}
+\usage{
+salesdedication_piechart()
+}
+\description{
+salesdedication_piechart
+}
+\examples{
+salesdedication_piechart()
+}

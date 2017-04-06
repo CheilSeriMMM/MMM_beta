@@ -1,0 +1,12 @@
+\name{modelestim}
+\alias{modelestim}
+\title{modelestim}
+\usage{
+modelestim(excl)
+}
+\description{
+modelestim
+}
+\examples{
+modelestim(excl)
+}

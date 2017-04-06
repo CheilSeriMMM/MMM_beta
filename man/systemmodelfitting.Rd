@@ -1,0 +1,12 @@
+\name{systemmodelfitting}
+\alias{systemmodelfitting}
+\title{systemmodelfitting}
+\usage{
+systemmodelfitting(model,model_fit,time)
+}
+\description{
+systemmodelfitting
+}
+\examples{
+systemmodelfitting(model,model_fit,time)
+}

@@ -1,0 +1,12 @@
+\name{digitalnondigitalopt}
+\alias{digitalnondigitalopt}
+\title{digitalnondigitalopt}
+\usage{
+digitalnondigitalopt(sim_base_month)
+}
+\description{
+digitalnondigitalopt
+}
+\examples{
+digitalnondigitalopt(sim_base_month)
+}

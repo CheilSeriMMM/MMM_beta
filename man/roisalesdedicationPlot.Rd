@@ -1,0 +1,12 @@
+\name{roisalesdedication_plot}
+\alias{roisalesdedication_plot}
+\title{roisalesdedication_plot}
+\usage{
+roisalesdedication_plot()
+}
+\description{
+roisalesdedication_plot
+}
+\examples{
+roisalesdedication_plot()
+}

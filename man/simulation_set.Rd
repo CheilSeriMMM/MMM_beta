@@ -1,0 +1,12 @@
+\name{simulation_set}
+\alias{simulation_set}
+\title{simulation_set}
+\usage{
+simulation_set(media)
+}
+\description{
+simulation_set
+}
+\examples{
+simulation_set(media)
+}

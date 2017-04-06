@@ -1,0 +1,12 @@
+\name{salesdecomposition}
+\alias{salesdecomposition}
+\title{salesdecomposition}
+\usage{
+salesdecomposition()
+}
+\description{
+salesdecomposition
+}
+\examples{
+salesdecomposition()
+}

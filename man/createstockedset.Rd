@@ -1,0 +1,12 @@
+\name{createstockedset}
+\alias{createstockedset}
+\title{createstockedset}
+\usage{
+createstockedset()
+}
+\description{
+createstockedset
+}
+\examples{
+createstockedset()
+}
