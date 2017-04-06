@@ -89,7 +89,6 @@ geneqs = function(){
   
   assign('resltset',resltset, envir = .GlobalEnv)
   
-  assign('eqs','equationset$equat',envir = .GlobalEnv)
   assign('depvar',depVar,envir = .GlobalEnv)
   assign('full_equation',equation,envir = .GlobalEnv)
   assign('inputvar',intersect(gsub("ln","",regressors),medialist),equation,envir = .GlobalEnv)
