@@ -30,7 +30,7 @@ basicmodelfitting = function(){
 
   y_hat=with(stockeddata, exp(eval(parse(text=temp1))))
     
-  temp=data.frame(time=c(1:length(y_hat)),y=exp(data[,depvar]),y_hat=y_hat)
+  temp=data.frame(time=c(1:length(y_hat)),y=exp(stockeddata[,depvar]),y_hat=y_hat)
   temp_melt=melt(temp,id='time')
     
     ggplot()+
