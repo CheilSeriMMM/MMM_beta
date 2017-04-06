@@ -3,7 +3,7 @@ grpprice<-function(
   endMonth
 ){
     
-    transformed1<-stockeddata
+    transformed1<-data
     transformed2<-unstockeddata
     
     
