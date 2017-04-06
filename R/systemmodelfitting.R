@@ -1,14 +1,15 @@
 
-systemmodelfitting=function(model,model_fit,time){
+systemmodelfitting=function(){
   library(reshape2)
   library(ggplot2)
   
   result=geneqs(model,model_fit)
+  Est <- parameterEstimates(model_fit)   
+  depvar <- Est$lhs[1]
   
+  y_hat=with(stockeddata, exp(eval(parse(text=result[[2]]))))
   
-  y_hat=with(data, exp(eval(parse(text=result[[2]]))))
-  
-  temp=data.frame(time=time,y=data[,dependent],y_hat=y_hat)
+  temp=data.frame(time=c(1:length(y_hat)),y=exp(stockeddata[,depvar]),y_hat=y_hat)
   temp_melt=melt(temp, id='time')
   
   ggplot()+
