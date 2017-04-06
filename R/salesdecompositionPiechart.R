@@ -1,17 +1,13 @@
-salesdedication_piechart<-function(){
+salesdedicationPiechart<-function(){
   
   investment3<-roimeasure()
   
   tmp=as.data.frame(t(investment3[c(2:nrow(investment2)),]),stringsAsFactors=F)
-  #colnames(tmp)
   
   for(i in 1:ncol(tmp)) {
     tmp[,c(i)]=as.numeric(tmp[,c(i)])
   }
-  
-  # tmp[order(tmp$`(f) sales Increment`),]
-  
-  #label ¢¯e AA¡¤©ø ¡íy¨ù¨¬
+ 
   tmp$sales_perc=round(tmp$`(f) sales Increment`/sum(tmp$`(f) sales Increment`)*100,1)
   tmp$label=paste(row.names(tmp),paste0(tmp$sales_perc,"%"),sep=" / ")
   
