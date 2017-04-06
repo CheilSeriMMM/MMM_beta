@@ -5,7 +5,7 @@ systemmodelfitting=function(){
   
   y_hat=with(stockeddata, exp(eval(parse(text=full_equation))))
   
-  temp=data.frame(time=c(1:length(y_hat),y=stockeddata[,depvar],y_hat=y_hat)
+  temp=data.frame(time=c(1:length(y_hat)),y=stockeddata[,depvar],y_hat=y_hat)
   temp_melt=melt(temp, id='time')
   
   ggplot()+
