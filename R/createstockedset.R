@@ -1,6 +1,13 @@
 createstockedset <- function(carryover) {
   
-  library(R.utils)
+  if("R.utils" %in% rownames(installed.packages())) {
+    library(R.utils)
+  } else {
+    install.packages("R.utils")
+    library(R.utils)
+  }
+  
+  
   if(isPackageLoaded("dplyr")) {
     detach("package:dplyr", unload=TRUE)
   }
