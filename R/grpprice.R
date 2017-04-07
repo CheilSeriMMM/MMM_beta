@@ -1,11 +1,11 @@
 grpprice<-function(startMonth,endMonth){
   
-  grpprice<-NULL   
+  grpprice<-NULL
   
-  alltvinputtotal<-sum(stockeddata[(stockeddata$month>=startMonth & stockeddata$month<=endMonth),c('All_TV')])   
-  allgrpinputtotal<-sum(stockeddata[(stockeddata$month>=startMonth & stockeddata$month<=endMonth),c('grp_all')])   
+  alltvinputtotal<-sum(stockeddata[(stockeddata$month>=startMonth & stockeddata$month<=endMonth),c('All_TV')])
+  allgrpinputtotal<-sum(stockeddata[(stockeddata$month>=startMonth & stockeddata$month<=endMonth),c('grp_all')])
   
-  grpprice$pricepergrp <- alltvinputtotal/allgrpinputtotal     
+  grpprice$pricepergrp <- alltvinputtotal/allgrpinputtotal
   
   tvinputtotal<-sum(stockeddata[(unstockeddata$month>=startMonth & stockeddata$month<=endMonth),c('tv')])   
   tvgrpinputtotal<-sum(stockeddata[(unstockeddata$month>=startMonth & stockeddata$month<=endMonth),c('grp_tv')])   
