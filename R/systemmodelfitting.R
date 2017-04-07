@@ -3,7 +3,7 @@ systemmodelfitting=function(){
   library(reshape2)
   library(ggplot2)
   
-  y_hat=with(stockeddata, exp(eval(parse(text=full_equation))))
+  y_hat=with(stockeddata, exp(eval(parse(text=full_equation[[2]]))))
   
   temp=data.frame(time=c(1:length(y_hat)),y=stockeddata[,depvar],y_hat=y_hat)
   temp_melt=melt(temp, id='time')
