@@ -1,6 +1,10 @@
 createstockedset <- function(carryover) {
   
-  detach("package:dplyr", unload=TRUE)
+  library(R.utils)
+  if(isPackageLoaded("dplyr")) {
+    detach("package:dplyr", unload=TRUE)
+  }
+  
   stockedcand=carryover[carryover$lambda > 0,]
   
   for(i in 1:nrow(stockedcand)) {
