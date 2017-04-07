@@ -93,4 +93,5 @@ geneqs = function(){
   assign('full_equation',equation,envir = .GlobalEnv)
   assign('inputvar',intersect(gsub("ln","",regressors),medialist),equation,envir = .GlobalEnv)
   
+  return(resltset)
 }
