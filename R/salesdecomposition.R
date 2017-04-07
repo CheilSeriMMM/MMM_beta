@@ -5,7 +5,7 @@ y_hat=with(stockeddata,exp(eval(parse(text=resltset$formula))))
 n=length(decom_variable)
 decompose=NULL
 
-for(iin1:n){
+for(i in 1:n){
 temp=stockeddata
 temp[,decom_variable[i]]=0
 temp1=with(temp,exp(eval(parse(text=resltset$formula))))
