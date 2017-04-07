@@ -1,4 +1,4 @@
-grpprice<-function(startMonth,endMonth){     
+grpprice<-function(startMonth,endMonth){
   
   grpprice<-NULL   
   
