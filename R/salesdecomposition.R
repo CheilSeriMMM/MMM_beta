@@ -1,6 +1,16 @@
 
 salesdecomposition=function(){
+a<-min(stockeddata$month)
+b<-max(stockeddata$month)
 
+  grpprice<-grpprice(a,b)
+  allpricepergrp <- grpprice$pricepergrp
+  tvpricepergrp <- grpprice$tvpricepergrp
+  capricepergrp <- grpprice$catvpricepergrp
+  jppricepergrp <- grpprice$jptvpricepergrp
+    
+
+  
 decom_variable<-paste0("ln",setdiff(inputvar,ratiolist))  
 y_hat=with(stockeddata,exp(eval(parse(text=resltset$formula))))
 n=length(decom_variable)
