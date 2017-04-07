@@ -1,6 +1,7 @@
 
-salesdecomposition=function(decom_variable){
+salesdecomposition=function(){
 
+decom_variable<-paste0("ln",setdiff(inputvar,ratiolist))  
 y_hat=with(stockeddata,exp(eval(parse(text=resltset$formula))))
 n=length(decom_variable)
 decompose=NULL
