@@ -17,5 +17,6 @@ salesdecomposition=function(decom_variable){    
   colnames(decompose)=c(decom_variable,depvar)   
   decompose$base=decompose[,depvar]-apply(decompose[,c(1:n)],1,sum)     
   
-  return(decompose) } 
+  assign('decompose_dataset',decompose,envir = .GlobalEnv) 
+} 
 
