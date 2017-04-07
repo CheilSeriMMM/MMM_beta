@@ -19,6 +19,6 @@ decompose$y=exp(stockeddata[,depvar])
 colnames(decompose)=c(decom_variable,depvar)
 decompose$base=decompose[,depvar]-apply(decompose[,c(1:n)],1,sum)
 
-assign('decompose_dataset',decompose,envir=.GlobalEnv)
+return(decompose)
 }
 
