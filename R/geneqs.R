@@ -1,4 +1,4 @@
-geneqs = function(model,model_fit){
+geneqs = function(){
   
   Est <- parameterEstimates(model_fit)
   depVar <- Est$lhs[1]   
