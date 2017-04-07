@@ -22,5 +22,5 @@ grpprice<-function(startMonth,endMonth){    
   
   grpprice$jptvpricepergrp <- jptvinputtotal/jptvgrpinputtotal      
   
-  return(grpprice) 
+  assign('grpprice',grpprice,envir = .GlobalEnv) 
 } 
