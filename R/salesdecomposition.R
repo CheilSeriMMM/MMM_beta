@@ -9,7 +9,8 @@ salesdecomposition=function(decom_variable){    
     temp=stockeddata     
     temp[,decom_variable[i]]=0     
     temp1=with(temp,exp(eval(parse(text=resltset$formula))))     
-    temp2=y_hat-temp1     decompose=cbind(decompose,temp2)   
+    temp2=y_hat-temp1     
+    decompose=cbind(decompose,temp2)   
   }   
   
   decompose=data.frame(decompose)   
