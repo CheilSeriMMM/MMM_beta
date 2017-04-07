@@ -10,8 +10,15 @@ simulation_set <- function(media) {
     idx = gsub("ln","",media)
   }
   
-  min=min(colMeans(data[,idx]))
-  max=max(colMeans(data[,idx]))
+  if(length(which(idx))==1) {
+    min=min(colMeans(data)[idx])
+    max=max(colMeans(data)[idx])
+  } else if(length(which(idx)) > 1) {
+    min=min(colMeans(data[,idx]))
+    max=max(colMeans(data[,idx]))
+  } else {
+    print("Error!")
+  }
   
   FROM=0.1*min
   TO=1000*max  
