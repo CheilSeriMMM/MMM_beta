@@ -1,9 +1,12 @@
-salesdecompositionPlot=function(data,time,dependent,decompose_dataset){
+salesdecompositionPlot=function(time){
 library(reshape2)
 library(ggplot2)
 library(plotly)
 library(RColorBrewer)
 
+  
+decompose_dataset=salesdecomposition()
+  
 decompose_dataset$time=data[,time]
 decompose1=melt(decompose_dataset[,colnames(decompose_dataset)!=dependent],id=colnames(decompose_dataset)[ncol(decompose_dataset)])
 
