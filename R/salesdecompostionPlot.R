@@ -1,9 +1,11 @@
-salesdecompositionPlot=function(){    
+salesdecompositionPlot=function(decom_variable){    
   
   library(reshape2)  
   library(ggplot2)  
   library(plotly)  
   library(RColorBrewer)    
+  
+  salesdecomposition(decom_variable)    
   
   decompose_dataset$time=c(1:nrow(decompose_dataset))  
   temp=melt(decompose_dataset[,colnames(decompose_dataset)!=depvar],id=colnames(decompose_dataset)[ncol(decompose_dataset)])      
@@ -16,7 +18,8 @@ salesdecompositionPlot=function(){   
   labs(x="week", y="sales amount") +    
   scale_fill_manual(values=brewer.pal(n = ncol(decompose_dataset)-2, name = "Blues")) +    
   theme_bw() +    
-  theme(axis.line = element_line(size=1, colour = "black"), panel.grid.major = element_blank(),          
+  theme(axis.line = element_line(size=1, colour = "black"), panel.grid.major = element_blank(),         
         panel.grid.minor = element_blank(), panel.border = element_blank(),          
         panel.background = element_blank())  
+
 }
