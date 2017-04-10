@@ -20,7 +20,7 @@ responsecurve <- function(startMonth, endMonth, media){
     group <- intersect(btllist, inputvar)
   } else if(media=="digital"){
     group <- intersect(digitallist, inputvar)
-  } else if(media %in% colnames(media)){
+  } else if(media %in% colnames(data)){
     group <- c(media)
   }  else{
       print("err: media is not a variable")
