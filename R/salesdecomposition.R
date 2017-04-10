@@ -1,5 +1,8 @@
 
 salesdecomposition=function(){
+  
+resltset<-geneqs()  
+  
 a<-min(stockeddata$month)
 b<-max(stockeddata$month)
 
