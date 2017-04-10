@@ -1,5 +1,6 @@
 simulation_set <- function(media) {
   media1<-as.character(media)
+  data<-stockeddata
   if(media1=="digital") {
     idx=colnames(data) %in% intersect(digitallist, gsub("ln","",inputvar))
   } else if(media1=="atl") {
