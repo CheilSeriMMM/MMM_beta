@@ -253,9 +253,6 @@ graphset_equirev2<-graphset_equirev
 names(graphset_equirev2)[1]<-"group1"
 names(graphset_equirev2)[2]<-"group2"
 
-
-write.csv(graphset_equirev2,"ddd.csv")
-
 p1<-ggplot(graphset_equirev2, aes(x=group2, y=group1, colour=media))+geom_line() + scale_y_continuous(labels=comma, limits=y_range)+scale_x_continuous(labels=comma,limits=x_range)
 
 p2<-p1+geom_point(data=minpoint, aes(x=, y=as.factor(paste0(group2,"time"))),size=3, group=1)
