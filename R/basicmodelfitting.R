@@ -2,6 +2,7 @@ basicmodelfitting = function(){
   
   library(reshape2)
   library(ggplot2)
+ resltset<-geneqs()
   
   y_hat=with(stockeddata, exp(eval(parse(text=resltset$eqs[1]))))
     
