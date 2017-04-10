@@ -7,8 +7,8 @@ library(RColorBrewer)
   
 decompose_dataset=salesdecomposition()
   
-decompose_dataset$time=data[,time]
-decompose1=melt(decompose_dataset[,colnames(decompose_dataset)!=dependent],id=colnames(decompose_dataset)[ncol(decompose_dataset)])
+decompose_dataset$time=stockeddata[,time]
+decompose1=melt(decompose_dataset[,colnames(decompose_dataset)!=depvar],id=colnames(decompose_dataset)[ncol(decompose_dataset)])
 
 
 ggplot()+
