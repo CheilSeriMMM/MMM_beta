@@ -1,23 +1,30 @@
 responsecurve <- function(startMonth, endMonth, media){
-  geneqs()
-  ResultFormula<-full_equation
+  dd<-geneqs()
+  
+  ResultFormula<-dd$formula
+  data<-stockeddata
   
   
-  if(is.vector(media)){
-    group <- media
-  } else if(media=="atl"){
-    group <- atllist
+  grpprice<-grpprice(startMonth,endMonth)
+  allpricepergrp <- grpprice$pricepergrp
+  tvpricepergrp <- grpprice$tvpricepergrp
+  capricepergrp <- grpprice$catvpricepergrp
+  jppricepergrp <- grpprice$jptvpricepergrp
+  
+  
+  
+  
+  if(media=="atl"){
+    group <- intersect(atllist, inputvar)
   } else if(media=="btl"){
-    group <- btllist
+    group <- intersect(btllist, inputvar)
   } else if(media=="digital"){
-    group <- btllist
-  } else {
-    if(media %in% colnames(media)){
-    group <- c(media)}
-    else{
+    group <- intersect(digitallist, inputvar)
+  } else if(media %in% colnames(media)){
+    group <- c(media)
+  }  else{
       print("err: media is not a variable")
     }
-  }
   
   
   case<-simulation_set(media)
@@ -51,11 +58,10 @@ responsecurve <- function(startMonth, endMonth, media){
 
   library(scales)
 
-    out=ggplot(graphset_digital, aes(x=input, y=yhat, colour=media))+
+    out=ggplot(graphset, aes(x=input, y=yhat, colour=media))+
     geom_line()+
     scale_y_continuous(labels=comma)+scale_x_continuous(labels=comma)+
-    ggtitle(" - Digital")
+    ggtitle(media)
   
   return(out)
 }
-
