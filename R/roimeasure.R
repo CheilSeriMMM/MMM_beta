@@ -9,6 +9,7 @@ roimeasure<-function(startMonth,endMonth){
   
   stockeddata=stockeddata[order(stockeddata$month,stockeddata$week),]
   min_num <- as.numeric(min(rownames(stockeddata[stockeddata$month==startMonth,])))
+  inputvar2<-setdiff(inputvar,ratiolist)
   
   inv_data_unstocked<- subset(unstockeddata, month>=startMonth & month<=endMonth, select=inputvar)   
   inv_data_stocked<- subset(stockeddata, month>=startMonth & month<=endMonth, select=inputvar)   
