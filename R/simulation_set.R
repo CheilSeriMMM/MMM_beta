@@ -22,7 +22,7 @@ simulation_set <- function(media) {
   }
   
   FROM=0.1*min
-  TO=1000*max  
+  TO=50*max  
   BY=(TO-FROM)/1000
   out=seq(from=FROM, to=TO, by=BY) 
   
