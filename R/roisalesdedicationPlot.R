@@ -1,6 +1,6 @@
-roisalesdedicationPlot<-function(){
+roisalesdedicationPlot<-function(startMonth,endMonth){
   
-  investment3<-roimeasure()
+  investment3<-roimeasure(startMonth,endMonth)
   
   plottingset<-investment3[c(8,9),]
   plottingset[3,]<-colnames(plottingset)
