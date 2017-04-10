@@ -33,7 +33,7 @@ responsecurve <- function(startMonth, endMonth, media){
   for(i in 1:length(group)){
     
     media1<-group[i]
-    nolog<-sub("ln","",media1)
+    withlog<-paste0("ln",media1)
     
     sim_data2<-subset(data, month>=startMonth & month<=endMonth)
       
@@ -45,12 +45,12 @@ responsecurve <- function(startMonth, endMonth, media){
     sim_set2 <- data.frame(param2[rep(1,length(case)), ])
       
     sim_set2[,"input"]<-case
-    sim_set2[, nolog]<-case
-    sim_set2[, media1]<-log(case)
+    sim_set2[, withlog]<-log(case)
+    sim_set2[, media1]<-case
     sim_set2[,"yhat"]<-with(sim_set2, exp(eval(parse(text=ResultFormula))))
       
     a<-subset(sim_set2, select=c(input, yhat))
-    a$media <- nolog
+    a$media <- withlog
       
     graphset<-rbind(graphset,a)
     }
