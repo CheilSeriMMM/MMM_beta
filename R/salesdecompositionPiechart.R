@@ -1,7 +1,7 @@
-salesdedicationPiechart<-function(){
+salesdedicationPiechart<-function(startMonth, endMonth){
   
-  investment3<-roimeasure()
-  
+  investment3<-roimeasure(startMonth, endMonth)
+ 
   tmp=as.data.frame(t(investment3[c(2:nrow(investment2)),]),stringsAsFactors=F)
   
   for(i in 1:ncol(tmp)) {
