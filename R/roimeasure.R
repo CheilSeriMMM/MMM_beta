@@ -1,6 +1,6 @@
-roimeasure<-function(decom_variable,startMonth,endMonth){
+roimeasure<-function(startMonth,endMonth){
   
-  salesdecomposition(decom_variable)
+  decompose_dataset<-salesdecomposition()
   grpprice(startMonth,endMonth)
 
   salesincrement <-data.frame(apply(decompose_dataset, 2,sum))
@@ -98,6 +98,7 @@ roimeasure<-function(decom_variable,startMonth,endMonth){
   atlroiexist<-atlinvestment
   atlroiexist[2,]<-0
   
+  a=as.numeric(carryover[carryover$media=="atl",2])
   
   for(p in 1:length(vt)){ 
     
@@ -113,7 +114,7 @@ roimeasure<-function(decom_variable,startMonth,endMonth){
     
     for (i in 1:nrow(inv_data_unstocked)){
       inputval<-inv_data_unstocked[i,nameee]
-      a=carryover[carryover$media=="atl",2]
+
       
       if(inputval==0){
         stocked <-0
