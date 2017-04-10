@@ -1,7 +1,12 @@
 roimeasure<-function(startMonth,endMonth){
   
   decompose_dataset<-salesdecomposition()
-  grpprice(startMonth,endMonth)
+  grpprice<-grpprice(startMonth,endMonth)
+  
+  allpricepergrp <- grpprice$pricepergrp
+  tvpricepergrp <- grpprice$tvpricepergrp
+  capricepergrp <- grpprice$catvpricepergrp
+  jppricepergrp <- grpprice$jptvpricepergrp
 
   salesincrement <-data.frame(apply(decompose_dataset, 2,sum))
   salesincrement<-t(salesincrement);
