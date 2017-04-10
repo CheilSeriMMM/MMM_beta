@@ -3,6 +3,14 @@ systemmodelfitting=function(){
   library(reshape2)
   library(ggplot2)
   
+  a<-min(stockeddata$month)
+  b<-max(stockeddata$month)
+  grpprice<-grpprice(a,b)
+  allpricepergrp <- grpprice$pricepergrp
+  tvpricepergrp <- grpprice$tvpricepergrp
+  capricepergrp <- grpprice$catvpricepergrp
+  jppricepergrp <- grpprice$jptvpricepergrp
+  
   y_hat=with(stockeddata, exp(eval(parse(text=full_equation))))
   
   temp=data.frame(time=c(1:length(y_hat)),y=exp(stockeddata[,depvar]),y_hat=y_hat)
