@@ -8,7 +8,7 @@ simulation_set <- function(media) {
   } else if(media1=="btl") {
     idx=colnames(data) %in% intersect(btllist, gsub("ln","",inputvar))
   } else {
-    idx = gsub("ln","",media)
+    idx = colnames(data) %in% gsub("ln","",media)
   }
   
   if(length(which(idx))==1) {
