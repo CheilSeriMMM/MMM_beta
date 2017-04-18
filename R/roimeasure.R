@@ -1,4 +1,6 @@
-roimeasure<-function(startMonth,endMonth){
+roimeasure<-function(
+  startMonth,
+  endMonth){
   
   decompose_dataset<-salesdecomposition()
   grpprice<-grpprice(startMonth,endMonth)
@@ -7,7 +9,7 @@ roimeasure<-function(startMonth,endMonth){
   tvpricepergrp <- grpprice$tvpricepergrp
   capricepergrp <- grpprice$catvpricepergrp
   jppricepergrp <- grpprice$jptvpricepergrp
-
+  
   salesincrement <-data.frame(apply(decompose_dataset, 2,sum))
   salesincrement<-t(salesincrement);
   rownames(salesincrement)<-NULL
@@ -80,14 +82,19 @@ roimeasure<-function(startMonth,endMonth){
     }
   }
   
+
+  stockedvarlist<-carryover$media
   lnstockedvarlist<-NULL
-  
+
   for(i in 1:length(stockedvarlist)){
     mm<- paste0("ln",stockedvarlist[i])
     lnstockedvarlist<-union(lnstockedvarlist,mm)
   }
   
   noprinputvar<-setdiff(inputvar,c("lnpr","pr",stockedvarlist,lnstockedvarlist))
+  
+  
+  
   investment2<-subset(investment, select=(colnames(investment) %in% noprinputvar) | (investment[1,] %in% noprinputvar))
   
   
@@ -104,23 +111,25 @@ roimeasure<-function(startMonth,endMonth){
   atlroiexist<-atlinvestment
   atlroiexist[2,]<-0
   
-  a=as.numeric(carryover[carryover$media=="atl",2])
   
+
   for(p in 1:length(vt)){ 
-    
+
     unlimstock<-0
     newused00<-0
     
     nameee <-nologvt[p]
     logname<-paste0("ln",nameee)
-    
+
+    a=as.numeric(carryover[carryover$media==nameee,2])
+        
     atlinvestment[1,p]<-logname
     atlroiexist[1,p]<-paste0(logname,"exist")
     
     
     for (i in 1:nrow(inv_data_unstocked)){
       inputval<-inv_data_unstocked[i,nameee]
-
+      
       
       if(inputval==0){
         stocked <-0
