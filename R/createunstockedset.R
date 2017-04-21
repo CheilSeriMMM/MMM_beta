@@ -1,11 +1,38 @@
-createunstockedset=function(){
-  log_data=unstockeddata[,]
+createstockedset <- function(unstockeddata, carryover, time) {
   
+  if("R.utils" %in% rownames(installed.packages())) {
+    library(R.utils)
+  } else {
+    install.packages("R.utils")
+    library(R.utils)
+  }
+  
+  
+  if(isPackageLoaded("dplyr")) {
+    detach("package:dplyr", unload=TRUE)
+  }
+  
+  stockedcand=carryover$media
+  
+  
+  for(i in 1:ncol(unstockeddata)){
+    va=colnames(unstockeddata)[i]
+    
+    if(va%in%stockedcand){
+      unstockeddata[,va] = filter(unstockeddata[,va], filter=carryover[carryover$media==va,2], method="recursive")
+    }
+  }
+
+  
+  stockeddata=unstockeddata
+  log_data=stockeddata[,]
+
   logadj<-5
   ration_adj<-0.00001
   
+  
   for(i in 4:ncol(log_data)) {
-    if(grepl('ratio_',colnames(log_data)[i])) {
+    if(grepl('ratio_', colnames(log_data)[i])) {
       log_data[,i]=log(log_data[,i]+ration_adj)
     } else {
       log_data[,i]=log(log_data[,i]+logadj)
@@ -14,12 +41,10 @@ createunstockedset=function(){
   
   colnames(log_data)[4:ncol(log_data)]=paste('ln',colnames(log_data)[4:ncol(log_data)],sep="")
   
-  nrow(unique(unstockeddata[,c(1:3)]))
-  nrow(unique(log_data[,c(1:3)]))
+  stockeddata=merge(stockeddata, log_data, by=time)
   
-  data=merge(unstockeddata,log_data,by=c('quarter','month','week'))
-  write.csv(data,"unstockeddata.csv",row.names=F)
+  write.csv(stockeddata,"stockeddata.csv",row.names=F)
   
-  return(data)
-  
+  library(dplyr)
+  return(stockeddata)
 }
