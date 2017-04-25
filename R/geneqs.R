@@ -43,10 +43,9 @@ geneqs = function(){
   
   
   
-  a=c('lnratio_atlad_tocomp', 'lnratio_btlad_tocomp', 'lnratio_digitalad_tocomp')
+  a=paste0("ln",ratiolist)
   
   nu_atl_tmp<- intersect(atllist, gsub("ln","",indpvar))
-  
   
   nu_atl<-NULL
   for(i in 1:length(nu_atl_tmp)){
@@ -64,9 +63,27 @@ geneqs = function(){
   nu_btl<-paste(intersect(btllist, gsub("ln","",indpvar)),collapse = "+")
   
   
-  a1=data.frame(denominator=c('comp_atl','comp_btl','comp_digital'),
-                numerator=c(nu_atl,nu_btl,nu_digital),
-                var=rep(c('lnratio_atlad_tocomp', 'lnratio_btlad_tocomp', 'lnratio_digitalad_tocomp'),stringsAsFactors=F))
+  pp= intersect(a,c('lnratio_atl_tocomp', 'lnratio_btl_tocomp', 'lnratio_digital_tocomp'))
+  
+  
+  nulist=NULL
+  denolist=NULL
+  
+  for(i in 1:length(a)){
+    nu_tmp=sub("lnratio_","",a[i])
+    nu_tmp=sub("_tocomp","",nu_tmp) 
+    if(nu_tmp%in%c("atl","btl","digital")){
+    nulist=c(nulist,get(paste0("nu_",nu_tmp)))  
+    } else{
+      nulist=c(nulist,nu_tmp)
+    }
+    denolist=c(denolist,paste0("comp_",nu_tmp))
+  }
+  
+  
+  a1=data.frame(denominator=denolist,
+                numerator=nulist,
+                var=rep(a,stringsAsFactors=F))
   
   
   
@@ -88,7 +105,8 @@ geneqs = function(){
   equation_temp1=paste(temp1$mult,collapse="+")
   
   
-  temp2$mult=paste(temp2[,2],"*",temp2[,3],"-",temp2[,2],"*",temp2[,4],sep="")
+  temp2$coef_new=paste0("(",temp2[,"coef"],")")
+  temp2$mult=paste(temp2[,"coef_new"],"*",temp2[,"numerator"],"-",temp2[,"coef_new"],"*",temp2[,"denominator"],sep="")
   equation_temp2=paste(temp2$mult,collapse="+")
   
   
@@ -108,4 +126,6 @@ geneqs = function(){
   assign('inputvar',intersect(gsub("ln","",regressors),medialist),equation,envir = .GlobalEnv)
   
   return(resltset)
-}
+ }
+  
+  
