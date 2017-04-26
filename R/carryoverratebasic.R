@@ -88,10 +88,10 @@ carryoverratebasic=function(
     }
     
     
-    partform1<-"(lambda+delta)*ly+(lambda*delta)*lly"
+    partform1<-"(lambda+delta)*ly-(lambda*delta)*lly"
     partform2_1<-"(x-delta*lx)"
     partform2_2<-"(x-lambda*lx)"
-    partform3<-"(x-(lambda+delta)*lx-(lambda*delta)*llx)"
+    partform3<-"(x-(lambda+delta)*lx+(lambda*delta)*llx)"
     
     
     form_y<-gsub("y",dependent,partform1)
