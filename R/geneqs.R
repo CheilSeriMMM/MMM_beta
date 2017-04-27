@@ -123,7 +123,7 @@ geneqs = function(){
   
   assign('depvar',depVar,envir = .GlobalEnv)
   assign('full_equation',equation,envir = .GlobalEnv)
-  assign('inputvar',intersect(gsub("ln","",regressors),medialist),equation,envir = .GlobalEnv)
+  assign('inputvar',intersect(setdiff(gsub("ln","",regressors),ratiolist),medialist),equation,envir = .GlobalEnv)
   
   return(resltset)
  }
