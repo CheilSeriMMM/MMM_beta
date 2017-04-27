@@ -3,6 +3,10 @@ systemmodelfitting=function(){
   library(reshape2)
   library(ggplot2)
   
+  dd=geneqs()
+  
+  full_equation=dd$formula
+  
   a<-min(stockeddata$month)
   b<-max(stockeddata$month)
   grpprice<-grpprice(a,b)
