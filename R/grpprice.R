@@ -2,7 +2,7 @@ grpprice<-function(startMonth,endMonth){
 
 grpprice<-NULL
 
-alltvinputtotal<-sum(stockeddata[(stockeddata$month>=startMonth&stockeddata$month<=endMonth),c('All_TV')])
+alltvinputtotal<-sum(stockeddata[(stockeddata$month>=startMonth&stockeddata$month<=endMonth),c('tv_all')])
 allgrpinputtotal<-sum(stockeddata[(stockeddata$month>=startMonth&stockeddata$month<=endMonth),c('grp_all')])
 
 grpprice$pricepergrp<-alltvinputtotal/allgrpinputtotal
