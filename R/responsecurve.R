@@ -28,7 +28,11 @@ responsecurve=function(
   }  else{
       print("err: media is not a variable")
     }
-  
+     sim_data2<-subset(data, month>=startMonth & month<=endMonth)
+      
+    param2<-data.frame(apply(sim_data2, 2, mean))  
+    param2<-t(param2); 
+    rownames(param2)<-NULL 
   case<-simulation_set(media)
   
   
@@ -60,11 +64,7 @@ responsecurve=function(
     media1<-group[i]
     withlog<-paste0("ln",media1)
     
-    sim_data2<-subset(data, month>=startMonth & month<=endMonth)
-      
-    param2<-data.frame(apply(sim_data2, 2, mean))  
-    param2<-t(param2); 
-    rownames(param2)<-NULL
+
       
     sim_set2 <- data.frame(param2[rep(1,length(case)), ])
       
