@@ -1,4 +1,7 @@
-function(startMonth, endMonth, media){
+responsecurve=function(
+  startMonth, 
+  endMonth, 
+  media){
   dd<-geneqs()
   
   ResultFormula<-dd$formula
