@@ -121,7 +121,7 @@ roimeasure<-function(
     nameee <-nologvt[p]
     logname<-paste0("ln",nameee)
 
-    a=as.numeric(carryover[carryover$media==nameee,2])
+    a=as.numeric(carryover[carryover$media==nameee,"lambda"])
         
     atlinvestment[1,p]<-logname
     atlroiexist[1,p]<-paste0(logname,"exist")
