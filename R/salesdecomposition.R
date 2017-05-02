@@ -20,11 +20,17 @@ n=length(decom_variable)
 decompose=NULL
 
 for(i in 1:n){
-temp=stockeddata
-temp[,decom_variable[i]]=0
-temp1=with(temp,exp(eval(parse(text=resltset$formula))))
-temp2=y_hat-temp1
-decompose=cbind(decompose,temp2)
+  temp=stockeddata
+  aa=decom_variable[i]
+  if(gsub("ln","",aa)%in%ratiolist){
+  temp[,decom_variable[i]]=logratioadj
+  } else {
+  temp[,decom_variable[i]]=logadj
+  }
+  
+  temp1=with(temp,exp(eval(parse(text=resltset$formula))))
+  temp2=y_hat-temp1
+  decompose=cbind(decompose,temp2)
 }
 
 decompose=data.frame(decompose)
