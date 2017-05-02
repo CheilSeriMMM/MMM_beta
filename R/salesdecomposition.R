@@ -23,9 +23,9 @@ for(i in 1:n){
   temp=stockeddata
   aa=decom_variable[i]
   if(gsub("ln","",aa)%in%ratiolist){
-  temp[,decom_variable[i]]=logratioadj
+  temp[,decom_variable[i]]=log(logratioadj)
   } else {
-  temp[,decom_variable[i]]=logadj
+  temp[,decom_variable[i]]=log(logadj)
   }
   
   temp1=with(temp,exp(eval(parse(text=resltset$formula))))
