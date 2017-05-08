@@ -17,7 +17,7 @@ twogroupsopt_budgetlimit = function(
   
   
   ResultFormula<-full_equation
-  sim_data <- subset(stockeddata, month==sim_base_month)
+  sim_data = subset(data, month>=startMonth & month<=endMonth)
   sum <- data.frame(lapply(sim_data, sum))
   
   group1all=0
