@@ -91,7 +91,7 @@ responsecurve=function(
     
   }
  
-  
+  write.csv(graphset,paste0(paste(group,collapse = "_"),"responsecurve.csv"))
   library(scales)
 
     out=ggplot(graphset, aes(x=input, y=yhat, colour=media))+
