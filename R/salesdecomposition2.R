@@ -1,5 +1,5 @@
 salesdecomposition2=function(
-  decomp_variable
+  decom_variable
   ){
   
   resltset<-geneqs()  
