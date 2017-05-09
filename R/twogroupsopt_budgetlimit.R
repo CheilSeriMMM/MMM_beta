@@ -23,13 +23,13 @@ twogroupsopt_budgetlimit = function(
   sim_data = subset(stockeddata, month>=startMonth & month<=endMonth)
   
   
-  sum <- data.frame(lapply(sim_data, sum))
+  sum <- data.frame(lapply(sim_data, mean))
   
   group1all=0
   for(i in 1:length(group1)){
     if(group1[i]%in%grplist){
-      grpprice=get(paste0(gsub("grp_","",group1[i]),"pricepergrp"))
-      group1all = group1all + sum[,group1[i]] * grpprice
+      gprice=get(paste0(gsub("grp_","",group1[i]),"pricepergrp"))
+      group1all = group1all + sum[,group1[i]] * gprice
     } else {
     group1all = group1all + sum[,group1[i]]
     }
@@ -39,8 +39,8 @@ twogroupsopt_budgetlimit = function(
   group2all=0
   for(i in 1:length(group2)){
     if(group2[i]%in%grplist){
-      grpprice=get(paste0(gsub("grp_","",group2[i]),"pricepergrp"))
-      group2all = group2all + sum[,group2[i]] * grpprice
+      gprice=get(paste0(gsub("grp_","",group2[i]),"pricepergrp"))
+      group2all = group2all + sum[,group2[i]] * gprice
     } else {
       group2all = group2all + sum[,group2[i]]
     }
