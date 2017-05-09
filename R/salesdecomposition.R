@@ -1,10 +1,9 @@
-
 salesdecomposition=function(){
   
-resltset<-geneqs()  
-  
-a<-min(stockeddata$month)
-b<-max(stockeddata$month)
+  resltset<-geneqs()  
+    
+  a<-min(stockeddata$month)
+  b<-max(stockeddata$month)
 
   grpprice<-grpprice(a,b)
   allpricepergrp <- grpprice$pricepergrp
@@ -13,31 +12,37 @@ b<-max(stockeddata$month)
   jppricepergrp <- grpprice$jptvpricepergrp
     
 
+    
+  decom_variable<-paste0("ln",setdiff(inputvar,ratiolist))
   
-decom_variable<-paste0("ln",setdiff(inputvar,ratiolist))  
-y_hat=with(stockeddata,exp(eval(parse(text=resltset$formula))))
-n=length(decom_variable)
-decompose=NULL
-
-for(i in 1:n){
-  temp=stockeddata
-  aa=decom_variable[i]
-  if(gsub("ln","",aa)%in%ratiolist){
-  temp[,decom_variable[i]]=log(logratioadj)
-  } else {
-  temp[,decom_variable[i]]=log(logadj)
+  
+  
+  y_hat=with(stockeddata,exp(eval(parse(text=resltset$formula))))
+  
+  n=length(decom_variable)
+  
+  decompose=stockeddata[,time]
+  
+  for(i in 1:n){
+    temp=stockeddata
+    aa=decom_variable[i]
+    if(gsub("ln","",aa)%in%ratiolist){
+    temp[,decom_variable[i]]=log(logratioadj)
+    } else {
+    temp[,decom_variable[i]]=log(logadj)
+    }
+    
+    temp1=with(temp,exp(eval(parse(text=resltset$formula))))
+    temp2=y_hat-temp1
+    decompose=cbind(decompose,temp2)
   }
   
-  temp1=with(temp,exp(eval(parse(text=resltset$formula))))
-  temp2=y_hat-temp1
-  decompose=cbind(decompose,temp2)
-}
+  decompose=data.frame(decompose)
+  decompose$y=exp(stockeddata[,depvar])
+  colnames(decompose)=c(time,decom_variable,depvar)
+  decompose$base=decompose[,depvar]-apply(decompose[,c(1:n)],1,sum)
+  
 
-decompose=data.frame(decompose)
-decompose$y=exp(stockeddata[,depvar])
-colnames(decompose)=c(decom_variable,depvar)
-decompose$base=decompose[,depvar]-apply(decompose[,c(1:n)],1,sum)
-
-return(decompose)
-}
+  return(decompose)
+  }
 
