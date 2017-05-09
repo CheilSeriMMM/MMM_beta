@@ -273,7 +273,7 @@ equitargetlevels<-function(startpoint,
     graphset_equirev$spendingsum<-graphset_equirev[,"group1timeconversion"] + graphset_equirev[,"group2timeconversion"]
     minsumset<-ddply(graphset_equirev, .(media), summarise, min=min(spendingsum, na.rm=T))
     minpoint<-graphset_equirev[which(graphset_equirev$spendingsum %in% minsumset$min), c(1,2,3)]
-    
+    minpoint2<-graphset_equirev[which(graphset_equirev$spendingsum %in% minsumset$min), ]
     
     graphset_equirev2 = graphset_equirev
     colnames(graphset_equirev)=c(paste(group1,collapse = "_"), paste(group2,collapse = "_"), "media","spendingsum")
@@ -285,7 +285,7 @@ equitargetlevels<-function(startpoint,
     p3 = p2+geom_point(aes(x=group1all, y=group2all), color='red', size=10, shape=43)
     
     
-    out=list(minpointset=minpoint,data=graphset_equirev,graph=p3)
+    out=list(minpointset=minpoint2,data=graphset_equirev,graph=p3)
     return(out)
 }  
    
