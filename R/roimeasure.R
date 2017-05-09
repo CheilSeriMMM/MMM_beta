@@ -2,7 +2,7 @@ roimeasure<-function(
   startMonth,
   endMonth){
   
-  decompose_dataset<-salesdecomposition()
+    decompose_dataset<-subset(salesdecomposition(), month>=startMonth & month<=endMonth)
   grpprice<-grpprice(startMonth,endMonth)
   
   allpricepergrp <- grpprice$pricepergrp
