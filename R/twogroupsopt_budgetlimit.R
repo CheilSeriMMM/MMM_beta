@@ -186,7 +186,7 @@ twogroupsopt_budgetlimit = function(
   
   
   twogroupsopt<-subset(buli_sim, select=c(group1all,group2all,yhathat4))
-  
+  colnames(twogroupsopt)=c(paste(group1,collapse = "_"),paste(group2,collapse = "_"),"yhattimeconversion")
   write.csv(twogroupsopt,"twogroupsopt.csv")
   
   return(plot)
