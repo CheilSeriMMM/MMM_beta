@@ -117,11 +117,15 @@ directindirect=function(
     
   
     colnames(decompose)=c(time, decom_variable)
-    decompose=subset(decompose, month>=startMonth & month<=endMonth)
+    
+    decompose = data.frame(decompose)
+    
+    decompose=subset(decompose, month>=startMonth & month<=endMonth, select=decom_variable)
     
     total = subset(salesdecomposition(), month>=startMonth & month<=endMonth)
   
     direct=t(data.frame(lapply(decompose,sum)))
+                  
     totalincrements=t(data.frame(lapply(subset(total,select=decom_variable),sum)))
     
 
