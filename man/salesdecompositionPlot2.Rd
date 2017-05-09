@@ -1,0 +1,12 @@
+\name{salesdecompositionPlot2}
+\alias{salesdecompositionPlot2}
+\title{salesdecompositionPlot2}
+\usage{
+salesdecompositionPlot2(time,sales_decomp)
+}
+\description{
+salesdecompositionPlot2
+}
+\examples{
+salesdecompositionPlot2(time,sales_decomp)
+}
