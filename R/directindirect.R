@@ -1,6 +1,6 @@
 directindirect=function(
   startMonth,
-  endMonth,
+  endMonth
 ){  
     library(data.table)
     
