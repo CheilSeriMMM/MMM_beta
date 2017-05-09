@@ -20,6 +20,8 @@ systemmodelfitting=function(){
   temp=data.frame(time=c(1:length(y_hat)),y=exp(stockeddata[,depvar]),y_hat=y_hat)
   temp_melt=melt(temp, id='time')
   
+  write.csv(temp,"systemmodelfitting.csv")
+  
   ggplot()+
     geom_line(aes(x=time, y=value, colour=variable), data=temp_melt, stat="identity") +
     ggtitle("") +
