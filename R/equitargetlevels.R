@@ -285,7 +285,8 @@ equitargetlevels<-function(startpoint,
     p3 = p2+geom_point(aes(x=group1all, y=group2all), color='red', size=10, shape=43)
     
     
-    return(p3)
+    out=list(minpointset=minpoint,data=graphset_equirev,graph=p3)
+    return(out)
 }  
    
     
