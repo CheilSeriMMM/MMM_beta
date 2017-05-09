@@ -1,0 +1,12 @@
+\name{actualaverage}
+\alias{actualaverage}
+\title{actualaverage}
+\usage{
+actualaverage(startMonth,endMonth)
+}
+\description{
+actualaverage
+}
+\examples{
+actualaverage(startMonth,endMonth)
+}
