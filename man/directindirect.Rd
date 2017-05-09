@@ -1,0 +1,12 @@
+\name{directindirect}
+\alias{directindirect}
+\title{directindirect}
+\usage{
+directindirect(startMonth,endMonth)
+}
+\description{
+directindirect
+}
+\examples{
+directindirect(startMonth,endMonth)
+}
