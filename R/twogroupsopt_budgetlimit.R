@@ -7,6 +7,8 @@ twogroupsopt_budgetlimit = function(
   
   rslt=geneqs()
   
+  
+  
   grpprice<-grpprice(startMonth,endMonth)
   
   allpricepergrp <- grpprice$pricepergrp
@@ -17,11 +19,13 @@ twogroupsopt_budgetlimit = function(
   
   
   ResultFormula<-full_equation
-  sim_data = subset(data, month>=startMonth & month<=endMonth)
+  
+  sim_data = subset(stockeddata, month>=startMonth & month<=endMonth)
+  
+  
   sum <- data.frame(lapply(sim_data, sum))
   
   group1all=0
-  
   for(i in 1:length(group1)){
     if(group1[i]%in%grplist){
       grpprice=get(paste0(gsub("grp_","",group1[i]),"pricepergrp"))
@@ -177,10 +181,13 @@ twogroupsopt_budgetlimit = function(
   
   buli_sim$yhathat4<-with(buli_sim, timeconversion*(exp(eval(parse(text=ResultFormula))))+adjust3)
   buli_sim$group1rate<-with(buli_sim, group1timeconversion/(group1timeconversion+group2timeconversion))
+  
   plot<-ggplot(buli_sim, aes(x=group1rate, y=yhathat4))+geom_line()+ geom_point(aes(x=realgroup1all, y=realrev), size=3, colour='blue')+scale_y_continuous(labels=comma)+scale_x_continuous(labels=comma)
+  
   
   twogroupsopt<-subset(buli_sim, select=c(group1all,group2all,yhathat4))
   
   write.csv(twogroupsopt,"twogroupsopt.csv")
+  
   return(plot)
 }
