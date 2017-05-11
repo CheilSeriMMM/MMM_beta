@@ -63,13 +63,13 @@ make_objfunc_gradient=function(
     noln <- sub("ln","",a[i,"var"])
     if(noln%in%grplist){                            
       if(noln=="grp_all"){
-        grpprice <- allpricepergrp *carryover[carryover$media==noln,"lambda"]       
+        grpprice <- allpricepergrp       
       } else if(noln=="grp_tv"){
-        grpprice <- tvpricepergrp*carryover[carryover$media==noln,"lambda"]
+        grpprice <- tvpricepergrp
       } else if(noln=="grp_ca"){
-        grpprice <- capricepergrp*carryover[carryover$media==noln,"lambda"]
+        grpprice <- capricepergrp
       } else{
-        grpprice <- jppricepergrp*carryover[carryover$media==noln,"lambda"]
+        grpprice <- jppricepergrp
       }
     } else {
       grpprice <-1
