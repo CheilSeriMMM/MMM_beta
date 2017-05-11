@@ -123,7 +123,7 @@ optresults_budlim=function(
   for (i in 1:length(rn2)){
     if(rn2[i]%in%grplist){
       value = tmp2[row.names(tmp2)==rn2[i],]
-      tmp2[row.names(tmp2)==rn2[i],]=value*get(paste0(gsub("grp_","",rn[i]),"pricepergrp"))
+      tmp2[row.names(tmp2)==rn2[i],]=value*get(paste0(gsub("grp_","",rn2[i]),"pricepergrp"))
     }
   }
   
