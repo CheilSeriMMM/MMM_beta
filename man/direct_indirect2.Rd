@@ -1,0 +1,12 @@
+\name{direct_indirect2}
+\alias{direct_indirect2}
+\title{direct_indirect2}
+\usage{
+direct_indirect2(startMonth,endMonth,decom_variable)
+}
+\description{
+direct_indirect2
+}
+\examples{
+direct_indirect2(startMonth,endMonth,decom_variable)
+}
