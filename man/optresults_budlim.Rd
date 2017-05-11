@@ -1,0 +1,12 @@
+\name{optresults_budlim}
+\alias{optresults_budlim}
+\title{optresults_budlim}
+\usage{
+optresults_budlim(startMonth,endMonth,time)
+}
+\description{
+optresults_budlim
+}
+\examples{
+optresults_budlim(startMonth,endMonth,time)
+}
