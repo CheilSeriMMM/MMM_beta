@@ -169,8 +169,6 @@ optresults_budlim=function(
                   eval_g_ineq=eval_g_ineq1,
                   opts=opts1)
 
-  print(res1)
-  
   
   opt_results1<-data.frame(exist = media_mean, optimum = res1$solution)
 
