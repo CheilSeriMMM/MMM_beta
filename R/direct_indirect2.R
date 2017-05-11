@@ -122,7 +122,7 @@ direct_indirect2=function(
     
     decompose=subset(decompose, month>=startMonth & month<=endMonth, select=decom_variable)
     
-    total = subset(salesdecomposition(), month>=startMonth & month<=endMonth)
+    total = subset(salesdecomposition2(decom_variable), month>=startMonth & month<=endMonth)
   
     direct=t(data.frame(lapply(decompose,sum)))
                   
