@@ -1,17 +1,23 @@
-
-make_objfunc_gradient<-function(
-  dffincoeff, 
-  atllist, 
-  grpgroup, 
-  pricepergrp, 
-  digitalra, 
-  atlra, 
-  digitalnu){
+make_objfunc_gradient=function(
+  startMonth,
+  endMonth
+  ){
   
-  atlratiocoeff<-dffincoeff[which(dffincoeff2$var=="lnratio_atlad_tocomp"),2]
-  digitalratiocoeff<-dffincoeff[which(dffincoeff2$var=="lnratio_digitalad_tocomp"),2]
-  conversionrate<-1
-  a<-dffincoeff
+  dd=geneqs()
+  dffincoeff = dd$coefset
+  
+  
+  grpprice<-grpprice(startMonth,endMonth)
+  
+  allpricepergrp <- grpprice$pricepergrp
+  tvpricepergrp <- grpprice$tvpricepergrp
+  capricepergrp <- grpprice$catvpricepergrp
+  jppricepergrp <- grpprice$jptvpricepergrp
+
+  
+  vg=intersect(dffincoeff$var, c(inputvar,paste0("ln",inputvar)))
+
+  a=dffincoeff[dffincoeff$var%in%vg,]
   
   lefts<-rep('x[', nrow(a))
   ggg<-paste(lefts, seq(1:nrow(a)),sep="")
@@ -24,8 +30,12 @@ make_objfunc_gradient<-function(
     
     if(nolog3%in%atllist){            
       a[i,"group"]<-"atl"  
+    } else if(nolog3%in%btllist){            
+      a[i,"group"]<-"btl"  
+    } else if(nolog3%in%digitallist){            
+      a[i,"group"]<-"digital"  
     } else {
-      a[i,"group"]<-"digital"
+      a[i,"group"]<-"other"
     }
     
   }
@@ -47,18 +57,19 @@ make_objfunc_gradient<-function(
   }
   
   
+  
+  
   for(i in 1:nrow(a)){
     noln <- sub("ln","",a[i,"var"])
-    
-    if(noln%in%grpgroup){                            
+    if(noln%in%grplist){                            
       if(noln=="grp_all"){
-        grpprice <- pricepergrp *conversionrate       
+        grpprice <- allpricepergrp *carryover[carryover$media==noln,"lambda"]       
       } else if(noln=="grp_tv"){
-        grpprice <- tvpricepergrp*conversionrate
+        grpprice <- tvpricepergrp*carryover[carryover$media==noln,"lambda"]
       } else if(noln=="grp_ca"){
-        grpprice <- catvpricepergrp*conversionrate
+        grpprice <- capricepergrp*carryover[carryover$media==noln,"lambda"]
       } else{
-        grpprice <- jptvpricepergrp*conversionrate
+        grpprice <- jppricepergrp*carryover[carryover$media==noln,"lambda"]
       }
     } else {
       grpprice <-1
@@ -83,53 +94,80 @@ make_objfunc_gradient<-function(
   
 
   
-  digitalnusubset<-subset(a,group=="digital")
-  digitalnu<-paste(digitalnusubset$vars,collapse="+")
-  digitalnu<-paste0("(",digitalnu,")")
+  digitalra=NULL
+  atlra=NULL
+  btlra=NULL
   
-  digitalra<-paste0("(",digitalnu,"^",digitalratiocoeff,")")   
+
+  if("lnratio_atl_tocomp"%in%dffincoeff$var){
+    atlratiocoeff<-dffincoeff[which(dffincoeff$var=="lnratio_atl_tocomp"),2]
+    atlnusubset<-subset(a,group=="atl")
+    atlnu<-paste(atlnusubset$vars,collapse="+")
+    atlnu<-paste0("(",atlnu,")")
+    atlra<-paste0("(",atlnu,"^",atlratiocoeff,")")   
+  }
   
-  atlnusubset<-subset(a,group=="atl")
-  atlnu<-paste(atlnusubset$vars,collapse="+")
-  atlnu<-paste0("(",atlnu,")")
-  atlra<-paste0("(",atlnu,"^",atlratiocoeff,")")            
+  if("lnratio_btl_tocomp"%in%dffincoeff$var){
+    btlratiocoeff<-dffincoeff[which(dffincoeff$var=="lnratio_btl_tocomp"),2]
+    btlnusubset<-subset(a,group=="btl")
+    btlnu<-paste(btlnusubset$vars,collapse="+")
+    btlnu<-paste0("(",btlnu,")")
+    btlra<-paste0("(",btlnu,"^",btlratiocoeff,")") 
+  }
   
-  ratio_func<-paste(digitalra,atlra,sep="*")            
+  if("lnratio_digital_tocomp"%in%dffincoeff$var){
+    digitalratiocoeff<-dffincoeff[which(dffincoeff$var=="lnratio_digital_tocomp"),2]
+    digitalnusubset<-subset(a,group=="digital")
+    digitalnu<-paste(digitalnusubset$vars,collapse="+")
+    digitalnu<-paste0("(",digitalnu,")")
+    digitalra<-paste0("(",digitalnu,"^",digitalratiocoeff,")")   
+  }
+
   
+  ratio_func<-paste(c(digitalra,atlra,btlra),collapse="*")   
   
-  objfunc<-paste(objfunc_origin,digitalra,sep="*")
-  objfunc<-paste(objfunc,atlra,sep="*")                    
+  objfunc<-paste(objfunc_origin,ratio_func,sep="*")
+  
   finobjfunc<-paste('-1',objfunc, sep="*")
   
   
   
+  a$comp_ratio_nu=1
+  a$partialdiff_ratio=1
   
-  for(i in 1:nrow(a)){
-    if(a[i,"group"]=="digital"){
+   for(i in 1:nrow(a)){
+    if(a[i,"group"]=="digital"&"lnratio_digital_tocomp"%in%dffincoeff$var){
       nn<-paste(digitalratiocoeff,digitalnu,sep="*")      
       nn<-paste0(nn,"^","(",digitalratiocoeff-1,")")
-      nn<-paste(nn,atlra,sep="*")
+      nn<-paste(nn,digitalra,sep="*")
       a[i,"comp_ratio_nu"]<-digitalra
+      a[i,"partialdiff_ratio"]<-paste("baserev",nn,sep="*")
       
-    } else if(a[i,"group"]=="atl"){
+    } else if(a[i,"group"]=="atl"&"lnratio_atl_tocomp"%in%dffincoeff$var){
       nn<-paste(atlratiocoeff,atlnu,sep="*")
       nn<-paste0(nn,"^","(",atlratiocoeff-1,")")
-      nn<-paste(nn,digitalra,sep="*")
+      nn<-paste(nn,atlra,sep="*")
       a[i,"comp_ratio_nu"]<-atlra
-    }
-    a[i,"partialdiff_ratio"]<-paste("baserev",nn,sep="*")
+      a[i,"partialdiff_ratio"]<-paste("baserev",nn,sep="*")
+    } else if(a[i,"group"]=="btl"&"lnratio_btl_tocomp"%in%dffincoeff$var){
+      nn<-paste(btlratiocoeff,btlnu,sep="*")
+      nn<-paste0(nn,"^","(",btlratiocoeff-1,")")
+      nn<-paste(nn,btlra,sep="*")
+      a[i,"comp_ratio_nu"]<-btlra
+      a[i,"partialdiff_ratio"]<-paste("baserev",nn,sep="*")
+    } 
+    
   }
-  
   
   a$final_partialdiff2<-paste0(a$partialdiff,"*",ratio_func,"+",objfunc_origin,"*",a$partialdiff_ratio)
   a$final_partialdiff1<-paste(a$final_partialdiff2,a$multiplier_expdt,sep="-")
-  
   
   
   b=NULL
   for(i in 1:nrow(a)){
     b[i]=parse(text=paste0(a[i,"final_partialdiff1"]))
   }
+  
   
   d=NULL
   for(i in 1:nrow(a)){
@@ -143,12 +181,27 @@ make_objfunc_gradient<-function(
   }
   
   
+  objfuncbase1<-paste("baserev",finobjfunc,sep="*")
+  objfuncbase2<-paste("baserev",objfunc,sep="*")
+  
+  
+  objfunc1<-paste(objfuncbase1,spnedfunc,sep="+")
+  objfunc2<-spnedfunc
+  
+  
+  gradient1<-b
+  
   
   eval_g_ineq1func<- paste(spnedfunc,"(totalspends_mean)",sep="-")
-  eval_g_ineq1_gradient<-c # 예산제약 부등호 제약의 gradient
+  eval_g_ineq1_gradient<-c 
   
   
   eval_g_ineq2func<- paste("opt_revtarget",objfuncbase2,sep="-")
-  eval_g_ineq2_gradient<-d # 목표매출 부등호 제약의 gradient  
-}
+  eval_g_ineq2_gradient<-d 
+  
+  
+  out=list(objfunc=objfunc1, spendfunc=objfunc2, objgrad=gradient1, budlimineq = eval_g_ineq1func, budlimineqgrad = eval_g_ineq1_gradient, targetineq=eval_g_ineq2func, targetineqgrad=eval_g_ineq2_gradient)
+             
+  return(out)
+  }
 
