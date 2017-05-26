@@ -124,7 +124,11 @@ make_objfunc_gradient=function(
   }
 
   
-  ratio_func<-paste(c(digitalra,atlra,btlra),collapse="*")   
+   if(is.null(digitalra)&is.null(atlra)&is.null(btlra)){
+    ratio_func=NULL
+  } else { 
+    ratio_func<-paste(c(digitalra,atlra,btlra),collapse="*")   
+  }
   
   objfunc<-paste(c(objfunc_origin,ratio_func),collapse="*")
   
