@@ -126,7 +126,7 @@ make_objfunc_gradient=function(
   
   ratio_func<-paste(c(digitalra,atlra,btlra),collapse="*")   
   
-  objfunc<-paste(objfunc_origin,ratio_func,sep="*")
+  objfunc<-paste(c(objfunc_origin,ratio_func),collapse="*")
   
   finobjfunc<-paste('-1',objfunc, sep="*")
   
