@@ -163,7 +163,14 @@ make_objfunc_gradient=function(
     
   }
   
-  a$final_partialdiff2<-paste0(a$partialdiff,"*",ratio_func,"+",objfunc_origin,"*",a$partialdiff_ratio)
+   if(is.null(ratio_func)){
+    a$final_partialdiff2<-paste0(a$partialdiff,"+",objfunc_origin,"*",a$partialdiff_ratio)
+  } else {
+    a$final_partialdiff2<-paste0(a$partialdiff,"*",ratio_func,"+",objfunc_origin,"*",a$partialdiff_ratio)
+  }
+    
+      
+      
   a$final_partialdiff1<-paste(a$final_partialdiff2,a$multiplier_expdt,sep="-")
   
   
